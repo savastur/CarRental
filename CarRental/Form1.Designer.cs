@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            zipCodebox = new TextBox();
             daysDrivenlabel = new Label();
             endingOdometerlabel = new Label();
             beginingOdometerlabel = new Label();
@@ -65,18 +64,11 @@
             clearButton = new Button();
             summeryButton = new Button();
             exitButton = new Button();
+            zipCodebox = new TextBox();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
             SuspendLayout();
-            // 
-            // zipCodebox
-            // 
-            zipCodebox.AccessibleName = "ZipCodeBox";
-            zipCodebox.Location = new Point(313, 264);
-            zipCodebox.Name = "zipCodebox";
-            zipCodebox.Size = new Size(143, 27);
-            zipCodebox.TabIndex = 5;
             // 
             // daysDrivenlabel
             // 
@@ -166,6 +158,7 @@
             endingOdometerBox.Name = "endingOdometerBox";
             endingOdometerBox.Size = new Size(143, 27);
             endingOdometerBox.TabIndex = 7;
+            endingOdometerBox.TextChanged += endingOdometerBox_TextChanged;
             // 
             // beginingOdometerbox
             // 
@@ -174,6 +167,7 @@
             beginingOdometerbox.Name = "beginingOdometerbox";
             beginingOdometerbox.Size = new Size(143, 27);
             beginingOdometerbox.TabIndex = 6;
+            beginingOdometerbox.TextChanged += beginingOdometerbox_TextChanged;
             // 
             // stateBox
             // 
@@ -182,6 +176,7 @@
             stateBox.Name = "stateBox";
             stateBox.Size = new Size(148, 27);
             stateBox.TabIndex = 4;
+            stateBox.TextChanged += stateBox_TextChanged;
             // 
             // cityBox
             // 
@@ -190,6 +185,7 @@
             cityBox.Name = "cityBox";
             cityBox.Size = new Size(148, 27);
             cityBox.TabIndex = 3;
+            cityBox.TextChanged += cityBox_TextChanged;
             // 
             // addressBox
             // 
@@ -198,6 +194,7 @@
             addressBox.Name = "addressBox";
             addressBox.Size = new Size(148, 27);
             addressBox.TabIndex = 2;
+            addressBox.TextChanged += addressBox_TextChanged;
             // 
             // nameBox
             // 
@@ -206,6 +203,7 @@
             nameBox.Name = "nameBox";
             nameBox.Size = new Size(148, 27);
             nameBox.TabIndex = 1;
+            nameBox.TextChanged += nameBox_TextChanged;
             // 
             // groupBox2
             // 
@@ -403,6 +401,7 @@
             daysDrivenbox.Name = "daysDrivenbox";
             daysDrivenbox.Size = new Size(143, 27);
             daysDrivenbox.TabIndex = 8;
+            daysDrivenbox.TextChanged += daysDrivenbox_TextChanged;
             // 
             // claculateButton
             // 
@@ -446,17 +445,26 @@
             exitButton.Text = "Exit";
             exitButton.UseVisualStyleBackColor = true;
             // 
+            // zipCodebox
+            // 
+            zipCodebox.AccessibleName = "ZipCodeBox";
+            zipCodebox.Location = new Point(308, 256);
+            zipCodebox.Name = "zipCodebox";
+            zipCodebox.Size = new Size(148, 27);
+            zipCodebox.TabIndex = 5;
+            zipCodebox.TextChanged += zipCodebox_TextChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 578);
+            Controls.Add(zipCodebox);
             Controls.Add(exitButton);
             Controls.Add(summeryButton);
             Controls.Add(clearButton);
             Controls.Add(claculateButton);
             Controls.Add(daysDrivenbox);
-            Controls.Add(zipCodebox);
             Controls.Add(groupBox4);
             Controls.Add(daysDrivenlabel);
             Controls.Add(endingOdometerlabel);
@@ -520,12 +528,11 @@
         private GroupBox groupBox4;
         private CheckBox seniorMember;
         private CheckBox AAAmember;
-        private TextBox zipBox;
-        private TextBox zipCodebox;
         private TextBox daysDrivenbox;
         private Button claculateButton;
         private Button clearButton;
         private Button summeryButton;
         private Button exitButton;
+        private TextBox zipCodebox;
     }
 }

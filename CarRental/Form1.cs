@@ -3,10 +3,10 @@
 //Spring Semester 2026
 //https://github.com/savastur/CarRental.git
 /*
- * [] Create a validation for all text boxes
- * [] Ensure that the days text box can't be less than 0 or greater than 45
- * [] Remove any invalid data and message the user that it's invalid
- * [] Beginnig odometer must be > ending odometer reading
+ * [x] Create a validation for all text boxes
+ * [x] Ensure that the days text box can't be less than 0 or greater than 45
+ * [x] Remove any invalid data and message the user that it's invalid
+ * [x] Beginnig odometer must be > ending odometer reading
  * [] Do not permit any calcuations unless all inputs are valid 
 */
 namespace CarRental
@@ -17,5 +17,163 @@ namespace CarRental
         {
             InitializeComponent();
         }
+        void Verify()
+        {
+            //name verification
+            if (nameBox.Text.Length == 0)
+            {
+                nameBox.BackColor = Color.LightYellow;
+            }
+            else
+            {
+                nameBox.BackColor = Color.White;
+            }
+            //address verification
+            if (addressBox.Text.Length == 0)
+            {
+                addressBox.BackColor = Color.LightYellow;
+            }
+            else
+            {
+                addressBox.BackColor = Color.White;
+            }
+            //city verification
+            if (cityBox.Text.Length == 0)
+            {
+                cityBox.BackColor = Color.LightYellow;
+            }
+            else
+            {
+                cityBox.BackColor = Color.White;
+            }
+            //zip code verification
+            if (zipCodebox.Text.Length == 0 || !NumberVerification(zipCodebox.Text))
+            {
+                zipCodebox.BackColor = Color.LightYellow;
+            }
+            else
+            {
+                zipCodebox.BackColor = Color.White;
+            }
+            //state verification
+            if (stateBox.Text.Length == 0)
+            {
+                stateBox.BackColor = Color.LightYellow;
+            }
+            else
+            {
+                stateBox.BackColor = Color.White;
+            }
+            //odometer verification
+            try
+            {
+                int endingOdometer = Int32.Parse(endingOdometerBox.Text);
+                int beginingOdometer = Int32.Parse(beginingOdometerbox.Text);
+                if (endingOdometer < beginingOdometer)
+                {
+                    MessageBox.Show("Ending odometer must be greater than beginning odometer.\n Final reading first before the begining reading.");
+                    endingOdometerBox.Text = "";
+                    beginingOdometerbox.Text = "";
+                }
+                else
+                {
+                    endingOdometerBox.BackColor = Color.White;
+                    beginingOdometerbox.BackColor = Color.White;
+                }
+            }
+            catch
+            {
+                if(beginingOdometerbox.Text.Length == 0 || endingOdometerBox.Text.Length == 0)
+                {
+                    endingOdometerBox.BackColor = Color.LightYellow;
+                    beginingOdometerbox.BackColor = Color.LightYellow;
+                }
+                else
+                {
+                    MessageBox.Show("Odometer readings must be valid numbers");
+                    endingOdometerBox.Text = "";
+                    beginingOdometerbox.Text = "";
+                }
+            }
+            //days driven verification
+            if(daysDrivenbox.Text.Length == 0)
+            {
+                daysDrivenbox.BackColor= Color.LightYellow;
+            }
+            else
+            {
+                if (!NumberVerification(daysDrivenbox.Text))
+                {
+                    MessageBox.Show("Days driven must be a valid number");
+                    daysDrivenbox.Text = "";
+                }
+                else
+                {
+                    int daysDriven = int.Parse(daysDrivenbox.Text);
+                    if(daysDriven < 0 || daysDriven > 45)
+                    {
+                        MessageBox.Show("Days driven must be between 0 and 45");
+                        daysDrivenbox.Text = "";
+                    }
+                    else
+                    {
+                        daysDrivenbox.BackColor = Color.White;
+                    }
+                }
+            }
+        }
+
+        private void nameBox_TextChanged(object sender, EventArgs e)
+        {
+            Verify();
+        }
+        private bool NumberVerification(string number)
+        {
+            try
+            {
+                int.Parse(number);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void zipCodebox_TextChanged(object sender, EventArgs e)
+        {
+            Verify();
+        }
+
+        private void addressBox_TextChanged(object sender, EventArgs e)
+        {
+            Verify();
+        }
+
+        private void cityBox_TextChanged(object sender, EventArgs e)
+        {
+            Verify();
+        }
+
+        private void stateBox_TextChanged(object sender, EventArgs e)
+        {
+            Verify();
+        }
+
+        private void beginingOdometerbox_TextChanged(object sender, EventArgs e)
+        {
+            Verify();
+        }
+
+        private void endingOdometerBox_TextChanged(object sender, EventArgs e)
+        {
+            Verify();
+        }
+
+        private void daysDrivenbox_TextChanged(object sender, EventArgs e)
+        {
+            Verify();
+        }
     }
+
 }
