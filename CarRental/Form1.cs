@@ -7,7 +7,7 @@
  * [x] Ensure that the days text box can't be less than 0 or greater than 45
  * [x] Remove any invalid data and message the user that it's invalid
  * [x] Beginnig odometer must be > ending odometer reading
- * [] Do not permit any calcuations unless all inputs are valid 
+ * [x] Do not permit any calcuations unless all inputs are valid 
 */
 namespace CarRental
 {
@@ -16,6 +16,20 @@ namespace CarRental
         public Form1()
         {
             InitializeComponent();
+            Default();
+        }
+        private void Default()
+        {
+            nameBox.Text = "";
+            addressBox.Text = "";
+            cityBox.Text = "";
+            stateBox.Text = "";
+            zipCodebox.Text = "";
+            beginingOdometerbox.Text = "";
+            endingOdometerBox.Text = "";
+            daysDrivenbox.Text = "";
+            claculateButton.Enabled = false;
+            summeryButton.Enabled = false;
         }
         void Verify()
         {
@@ -120,6 +134,28 @@ namespace CarRental
                         daysDrivenbox.BackColor = Color.White;
                     }
                 }
+            }
+            // Enable buttons if all inputs are valid
+            try
+            {
+                int endingOdometer = Int32.Parse(endingOdometerBox.Text);
+                int beginingOdometer = Int32.Parse(beginingOdometerbox.Text);
+                int daysDriven = int.Parse(daysDrivenbox.Text);
+                // All .Lengths verify that text boxes are filled.
+                if (nameBox.Text.Length != 0 && addressBox.Text.Length != 0 && cityBox.Text.Length != 0 && stateBox.Text.Length != 0 && zipCodebox.Text.Length != 0 && endingOdometer >= beginingOdometer && daysDriven >= 0 && daysDriven <= 45)
+                {
+                    claculateButton.Enabled = true;
+                }
+                else
+                {
+                    claculateButton.Enabled = false;
+                }
+
+            }
+            catch
+            {
+                claculateButton.Enabled = false;
+                summeryButton.Enabled = false;
             }
         }
 
