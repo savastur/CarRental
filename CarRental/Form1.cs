@@ -7,7 +7,13 @@
  * [x] Ensure that the days text box can't be less than 0 or greater than 45
  * [x] Remove any invalid data and message the user that it's invalid
  * [x] Beginnig odometer must be > ending odometer reading
- * [x] Do not permit any calcuations unless all inputs are valid 
+ * [x] Do not permit any calcuations unless all inputs are valid
+ * [] Enable the summary button only after the calculation button has been clicked
+ * [] Claculate the distance driven the fisrt 200 miles are free
+ * [] If miles is > 200, charge $0.12 per mile
+ * [] If miles is > 500, charge $0.10 per mile
+ * [] Determine if the distance driven is in miles or kilometers, all calulations should be in miles. 1 kilometer = 0.62miles
+ * [] Check to see if the AAA or Senior discount are selected, Senior get a 3% and AAA get a 5% discount.
 */
 namespace CarRental
 {
@@ -97,7 +103,7 @@ namespace CarRental
             }
             catch
             {
-                if(beginingOdometerbox.Text.Length == 0 || endingOdometerBox.Text.Length == 0)
+                if (beginingOdometerbox.Text.Length == 0 || endingOdometerBox.Text.Length == 0)
                 {
                     endingOdometerBox.BackColor = Color.LightYellow;
                     beginingOdometerbox.BackColor = Color.LightYellow;
@@ -110,9 +116,9 @@ namespace CarRental
                 }
             }
             //days driven verification
-            if(daysDrivenbox.Text.Length == 0)
+            if (daysDrivenbox.Text.Length == 0)
             {
-                daysDrivenbox.BackColor= Color.LightYellow;
+                daysDrivenbox.BackColor = Color.LightYellow;
             }
             else
             {
@@ -124,7 +130,7 @@ namespace CarRental
                 else
                 {
                     int daysDriven = int.Parse(daysDrivenbox.Text);
-                    if(daysDriven < 0 || daysDriven > 45)
+                    if (daysDriven < 0 || daysDriven > 45)
                     {
                         MessageBox.Show("Days driven must be between 0 and 45");
                         daysDrivenbox.Text = "";
@@ -209,6 +215,36 @@ namespace CarRental
         private void daysDrivenbox_TextChanged(object sender, EventArgs e)
         {
             Verify();
+        }
+        // Converts kilometers to miles using the conversion factor 1 kilometer = 0.62 miles
+        private double KilometersToMiles(double kilometers)
+        {
+            return kilometers * 0.62;
+        }
+
+        private void claculateButton_Click(object sender, EventArgs e)
+        {
+            int endingOdometer = Int32.Parse(endingOdometerBox.Text);
+            int beginingOdometer = Int32.Parse(beginingOdometerbox.Text);
+            // Verify's if the kilometers is selected 
+            if (kilometerButton.Checked)
+            {
+                // Gives total miles by converting the difference of odometer readings from kilometers.
+                double miles = KilometersToMiles(endingOdometer - beginingOdometer);
+                // Converts to int for simplicity in calculations
+                Calculations(Convert.ToInt32(miles)); // Sends distance driven in miles
+            }
+            if (milesButton.Checked)
+            {
+                int miles = endingOdometer - beginingOdometer;
+                Calculations(miles); // Sends distance driven in miles
+            }
+            
+        }
+        // Calculates Cost of distance driven, days driven, and discounts if applicable.
+        private void Calculations(int milesDriven)
+        {
+
         }
     }
 

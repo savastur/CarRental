@@ -413,6 +413,7 @@
             claculateButton.TabStop = false;
             claculateButton.Text = "Calculate";
             claculateButton.UseVisualStyleBackColor = true;
+            claculateButton.Click += claculateButton_Click;
             // 
             // clearButton
             // 
